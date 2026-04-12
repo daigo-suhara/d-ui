@@ -499,6 +499,248 @@ export default function Example() {
       { label: "サイズ", code: `<div className="space-y-4">\n  <AvatarGroup size="sm" avatars={[{name:"田中"},{name:"佐藤"},{name:"山田"}]} />\n  <AvatarGroup size="md" avatars={[{name:"田中"},{name:"佐藤"},{name:"山田"}]} />\n  <AvatarGroup size="lg" avatars={[{name:"田中"},{name:"佐藤"},{name:"山田"}]} />\n</div>` },
     ],
   },
+  // ── Typewriter ───────────────────────────────────────────────────
+  {
+    name: "typewriter",
+    title: "Typewriter",
+    description: "複数のテキストを順番にタイプ＆デリートするタイプライターエフェクト。",
+    category: "typography",
+    filePath: "registry/components/typewriter.tsx",
+    props: [
+      { name: "texts", type: "string[]", description: "順番に表示するテキストの配列" },
+      { name: "speed", type: "number", default: "80", description: "タイピング速度（ミリ秒/文字）" },
+      { name: "deleteSpeed", type: "number", default: "40", description: "削除速度（ミリ秒/文字）" },
+      { name: "pause", type: "number", default: "1500", description: "テキスト表示後の待機時間（ミリ秒）" },
+      { name: "loop", type: "boolean", default: "true", description: "ループ再生" },
+      { name: "cursor", type: "boolean", default: "true", description: "カーソルの表示" },
+      { name: "className", type: "string", description: "追加のCSSクラス" },
+    ],
+    usage: `import { Typewriter } from "@/components/ui/typewriter"
+
+export default function Example() {
+  return (
+    <h1 className="text-4xl font-bold">
+      We build{" "}
+      <Typewriter
+        texts={["beautiful UIs.", "fast apps.", "great products."]}
+      />
+    </h1>
+  )
+}`,
+    examples: [
+      {
+        label: "基本",
+        code: `<div className="text-2xl font-semibold">
+  I love{" "}
+  <Typewriter texts={["React", "TypeScript", "Next.js", "Tailwind CSS"]} />
+</div>`,
+      },
+      {
+        label: "カーソルなし",
+        code: `<Typewriter
+  texts={["Hello World", "こんにちは", "Bonjour", "Hola"]}
+  cursor={false}
+  className="text-xl"
+/>`,
+      },
+      {
+        label: "速度調整",
+        code: `<Typewriter
+  texts={["ゆっくり表示されます...", "じっくり読めます。"]}
+  speed={120}
+  deleteSpeed={60}
+  pause={2500}
+  className="text-lg"
+/>`,
+      },
+    ],
+  },
+
+  // ── Flip Card ────────────────────────────────────────────────────
+  {
+    name: "flip-card",
+    title: "Flip Card",
+    description: "ホバーまたはクリックで表裏がフリップするカードコンポーネント。",
+    category: "cards",
+    filePath: "registry/components/flip-card.tsx",
+    props: [
+      { name: "front", type: "ReactNode", description: "表面のコンテンツ" },
+      { name: "back", type: "ReactNode", description: "裏面のコンテンツ" },
+      { name: "trigger", type: '"hover" | "click"', default: '"hover"', description: "フリップのトリガー" },
+      { name: "direction", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "フリップの方向" },
+      { name: "height", type: "string", default: '"200px"', description: "カードの高さ" },
+      { name: "className", type: "string", description: "追加のCSSクラス" },
+    ],
+    usage: `import { FlipCard } from "@/components/ui/flip-card"
+
+export default function Example() {
+  return (
+    <FlipCard
+      height="180px"
+      className="w-64"
+      front={
+        <div className="flex h-full items-center justify-center rounded-xl bg-primary text-primary-foreground text-lg font-bold">
+          表面
+        </div>
+      }
+      back={
+        <div className="flex h-full items-center justify-center rounded-xl bg-muted text-foreground text-sm p-4 text-center">
+          裏面のコンテンツがここに表示されます。
+        </div>
+      }
+    />
+  )
+}`,
+    examples: [
+      {
+        label: "ホバーでフリップ",
+        code: `<FlipCard
+  height="160px"
+  className="w-56"
+  front={
+    <div className="flex h-full items-center justify-center rounded-xl bg-primary text-primary-foreground text-lg font-bold">
+      ホバーしてね
+    </div>
+  }
+  back={
+    <div className="flex h-full items-center justify-center rounded-xl bg-muted p-4 text-center text-sm">
+      裏面が見えました！
+    </div>
+  }
+/>`,
+      },
+      {
+        label: "クリックでフリップ",
+        code: `<FlipCard
+  trigger="click"
+  height="160px"
+  className="w-56"
+  front={
+    <div className="flex h-full items-center justify-center rounded-xl border-2 border-dashed border-primary text-primary font-semibold">
+      クリックしてね
+    </div>
+  }
+  back={
+    <div className="flex h-full items-center justify-center rounded-xl bg-primary text-primary-foreground font-semibold">
+      もう一度クリックで戻る
+    </div>
+  }
+/>`,
+      },
+      {
+        label: "縦方向フリップ",
+        code: `<FlipCard
+  direction="vertical"
+  height="160px"
+  className="w-56"
+  front={
+    <div className="flex h-full items-center justify-center rounded-xl bg-emerald-500 text-white font-bold text-lg">
+      縦にフリップ
+    </div>
+  }
+  back={
+    <div className="flex h-full items-center justify-center rounded-xl bg-violet-500 text-white font-bold text-lg">
+      裏面
+    </div>
+  }
+/>`,
+      },
+    ],
+  },
+
+  // ── Magnetic Button ──────────────────────────────────────────────
+  {
+    name: "magnetic-button",
+    title: "Magnetic Button",
+    description: "マウスカーソルに引き寄せられる磁石エフェクトのボタン。",
+    category: "buttons",
+    filePath: "registry/components/magnetic-button.tsx",
+    props: [
+      { name: "strength", type: "number", default: "30", description: "引き寄せの強さ（px）" },
+      { name: "radius", type: "number", default: "150", description: "磁石が反応する半径（px）" },
+      { name: "className", type: "string", description: "追加のCSSクラス" },
+    ],
+    usage: `import { MagneticButton } from "@/components/ui/magnetic-button"
+
+export default function Example() {
+  return (
+    <MagneticButton>
+      Hover around me
+    </MagneticButton>
+  )
+}`,
+    examples: [
+      {
+        label: "基本",
+        code: `<MagneticButton>Hover around me</MagneticButton>`,
+      },
+      {
+        label: "強度調整",
+        code: `<div className="flex gap-6 items-center">
+  <MagneticButton strength={15}>Subtle</MagneticButton>
+  <MagneticButton strength={30}>Normal</MagneticButton>
+  <MagneticButton strength={60}>Strong</MagneticButton>
+</div>`,
+      },
+    ],
+  },
+
+  // ── Step Indicator ───────────────────────────────────────────────
+  {
+    name: "step-indicator",
+    title: "Step Indicator",
+    description: "ウィザードやフォームのステップ進行を水平・垂直で視覚化するインジケーター。",
+    category: "data",
+    filePath: "registry/components/step-indicator.tsx",
+    props: [
+      { name: "steps", type: "{ label: string; description?: string }[]", description: "ステップの配列" },
+      { name: "currentStep", type: "number", description: "現在のステップインデックス（0始まり）" },
+      { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "表示方向" },
+      { name: "className", type: "string", description: "追加のCSSクラス" },
+    ],
+    usage: `import { StepIndicator } from "@/components/ui/step-indicator"
+
+export default function Example() {
+  return (
+    <StepIndicator
+      currentStep={1}
+      steps={[
+        { label: "アカウント作成" },
+        { label: "プロフィール設定" },
+        { label: "確認" },
+      ]}
+    />
+  )
+}`,
+    examples: [
+      {
+        label: "水平（基本）",
+        code: `<StepIndicator
+  currentStep={1}
+  steps={[
+    { label: "アカウント" },
+    { label: "プロフィール" },
+    { label: "確認" },
+    { label: "完了" },
+  ]}
+/>`,
+      },
+      {
+        label: "垂直",
+        code: `<StepIndicator
+  orientation="vertical"
+  currentStep={2}
+  steps={[
+    { label: "注文受付", description: "ご注文が確定しました" },
+    { label: "梱包中", description: "商品を梱包しています" },
+    { label: "配送中", description: "ドライバーが向かっています" },
+    { label: "配達完了" },
+  ]}
+  className="max-w-xs"
+/>`,
+      },
+    ],
+  },
 ];
 
 export function getComponentByName(name: string): ComponentConfig | undefined {

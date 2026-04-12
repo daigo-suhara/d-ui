@@ -14,6 +14,10 @@ import { Rating } from "@/registry/components/rating";
 import { Marquee, MarqueeItem } from "@/registry/components/marquee";
 import { Kbd, Shortcut } from "@/registry/components/kbd";
 import { AvatarGroup } from "@/registry/components/avatar-group";
+import { Typewriter } from "@/registry/components/typewriter";
+import { FlipCard } from "@/registry/components/flip-card";
+import { MagneticButton } from "@/registry/components/magnetic-button";
+import { StepIndicator } from "@/registry/components/step-indicator";
 import { Users, TrendingUp, ShoppingCart, Activity } from "lucide-react";
 
 type ComponentName =
@@ -29,7 +33,11 @@ type ComponentName =
   | "rating"
   | "marquee"
   | "kbd"
-  | "avatar-group";
+  | "avatar-group"
+  | "typewriter"
+  | "flip-card"
+  | "magnetic-button"
+  | "step-indicator";
 
 function SegmentedDemo() {
   const [v, setV] = React.useState("list");
@@ -249,6 +257,108 @@ const previews: Record<ComponentName, React.ReactNode[]> = {
         />
       ))}
     </div>,
+  ],
+  "typewriter": [
+    <div className="text-2xl font-semibold" key="0">
+      I love{" "}
+      <Typewriter texts={["React", "TypeScript", "Next.js", "Tailwind CSS"]} />
+    </div>,
+    <Typewriter
+      key="1"
+      texts={["Hello World", "こんにちは", "Bonjour", "Hola"]}
+      cursor={false}
+      className="text-xl"
+    />,
+    <Typewriter
+      key="2"
+      texts={["ゆっくり表示されます...", "じっくり読めます。"]}
+      speed={120}
+      deleteSpeed={60}
+      pause={2500}
+      className="text-lg"
+    />,
+  ],
+  "flip-card": [
+    <FlipCard
+      key="0"
+      height="160px"
+      className="w-56"
+      front={
+        <div className="flex h-full items-center justify-center rounded-xl bg-primary text-primary-foreground text-lg font-bold">
+          ホバーしてね
+        </div>
+      }
+      back={
+        <div className="flex h-full items-center justify-center rounded-xl bg-muted p-4 text-center text-sm">
+          裏面が見えました！
+        </div>
+      }
+    />,
+    <FlipCard
+      key="1"
+      trigger="click"
+      height="160px"
+      className="w-56"
+      front={
+        <div className="flex h-full items-center justify-center rounded-xl border-2 border-dashed border-primary text-primary font-semibold">
+          クリックしてね
+        </div>
+      }
+      back={
+        <div className="flex h-full items-center justify-center rounded-xl bg-primary text-primary-foreground font-semibold">
+          もう一度クリックで戻る
+        </div>
+      }
+    />,
+    <FlipCard
+      key="2"
+      direction="vertical"
+      height="160px"
+      className="w-56"
+      front={
+        <div className="flex h-full items-center justify-center rounded-xl bg-emerald-500 text-white font-bold text-lg">
+          縦にフリップ
+        </div>
+      }
+      back={
+        <div className="flex h-full items-center justify-center rounded-xl bg-violet-500 text-white font-bold text-lg">
+          裏面
+        </div>
+      }
+    />,
+  ],
+  "magnetic-button": [
+    <MagneticButton key="0">Hover around me</MagneticButton>,
+    <div className="flex gap-6 items-center" key="1">
+      <MagneticButton strength={15}>Subtle</MagneticButton>
+      <MagneticButton strength={30}>Normal</MagneticButton>
+      <MagneticButton strength={60}>Strong</MagneticButton>
+    </div>,
+  ],
+  "step-indicator": [
+    <StepIndicator
+      key="0"
+      currentStep={1}
+      steps={[
+        { label: "アカウント" },
+        { label: "プロフィール" },
+        { label: "確認" },
+        { label: "完了" },
+      ]}
+      className="w-full max-w-sm"
+    />,
+    <StepIndicator
+      key="1"
+      orientation="vertical"
+      currentStep={2}
+      steps={[
+        { label: "注文受付", description: "ご注文が確定しました" },
+        { label: "梱包中", description: "商品を梱包しています" },
+        { label: "配送中", description: "ドライバーが向かっています" },
+        { label: "配達完了" },
+      ]}
+      className="max-w-xs"
+    />,
   ],
 };
 
