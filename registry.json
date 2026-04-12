@@ -1,0 +1,98 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "daigo-ui",
+  "homepage": "http://localhost:3000",
+  "items": [
+    {
+      "name": "gradient-button",
+      "type": "registry:component",
+      "title": "Gradient Button",
+      "description": "カスタマイズ可能なグラデーション背景とホバーアニメーションを持つボタン。",
+      "files": [{ "path": "registry/components/gradient-button.tsx", "type": "registry:component", "target": "components/ui/gradient-button.tsx" }]
+    },
+    {
+      "name": "glow-card",
+      "type": "registry:component",
+      "title": "Glow Card",
+      "description": "ホバー時にグロー発光するカードコンポーネント。",
+      "files": [{ "path": "registry/components/glow-card.tsx", "type": "registry:component", "target": "components/ui/glow-card.tsx" }]
+    },
+    {
+      "name": "animated-counter",
+      "type": "registry:component",
+      "title": "Animated Counter",
+      "description": "スクロールでビューポートに入ったときにカウントアップするコンポーネント。",
+      "files": [{ "path": "registry/components/animated-counter.tsx", "type": "registry:component", "target": "components/ui/animated-counter.tsx" }]
+    },
+    {
+      "name": "status-badge",
+      "type": "registry:component",
+      "title": "Status Badge",
+      "description": "パルスアニメーション付きのステータスバッジ。",
+      "files": [{ "path": "registry/components/status-badge.tsx", "type": "registry:component", "target": "components/ui/status-badge.tsx" }]
+    },
+    {
+      "name": "shimmer-text",
+      "type": "registry:component",
+      "title": "Shimmer Text",
+      "description": "CSSグラデーションアニメーションのシマーテキスト。",
+      "files": [{ "path": "registry/components/shimmer-text.tsx", "type": "registry:component", "target": "components/ui/shimmer-text.tsx" }]
+    },
+    {
+      "name": "segmented-control",
+      "type": "registry:component",
+      "title": "Segmented Control",
+      "description": "タブのようにセグメントを切り替えられるボタングループ。",
+      "files": [{ "path": "registry/components/segmented-control.tsx", "type": "registry:component", "target": "components/ui/segmented-control.tsx" }]
+    },
+    {
+      "name": "stats-card",
+      "type": "registry:component",
+      "title": "Stats Card",
+      "description": "数値・トレンド・アイコンを表示するダッシュボード向けカード。",
+      "files": [{ "path": "registry/components/stats-card.tsx", "type": "registry:component", "target": "components/ui/stats-card.tsx" }]
+    },
+    {
+      "name": "progress-ring",
+      "type": "registry:component",
+      "title": "Progress Ring",
+      "description": "SVGで描画する円形プログレスインジケーター。",
+      "files": [{ "path": "registry/components/progress-ring.tsx", "type": "registry:component", "target": "components/ui/progress-ring.tsx" }]
+    },
+    {
+      "name": "timeline",
+      "type": "registry:component",
+      "title": "Timeline",
+      "description": "縦型タイムラインで時系列イベントを表示するコンポーネント。",
+      "files": [{ "path": "registry/components/timeline.tsx", "type": "registry:component", "target": "components/ui/timeline.tsx" }]
+    },
+    {
+      "name": "rating",
+      "type": "registry:component",
+      "title": "Rating",
+      "description": "クリックやホバーで選択できる星評価コンポーネント。",
+      "files": [{ "path": "registry/components/rating.tsx", "type": "registry:component", "target": "components/ui/rating.tsx" }]
+    },
+    {
+      "name": "marquee",
+      "type": "registry:component",
+      "title": "Marquee",
+      "description": "コンテンツを水平に無限スクロールするマーキーコンポーネント。",
+      "files": [{ "path": "registry/components/marquee.tsx", "type": "registry:component", "target": "components/ui/marquee.tsx" }]
+    },
+    {
+      "name": "kbd",
+      "type": "registry:component",
+      "title": "Kbd",
+      "description": "キーボードショートカットキーを視覚的に表示するコンポーネント。",
+      "files": [{ "path": "registry/components/kbd.tsx", "type": "registry:component", "target": "components/ui/kbd.tsx" }]
+    },
+    {
+      "name": "avatar-group",
+      "type": "registry:component",
+      "title": "Avatar Group",
+      "description": "複数のアバターを重ねて表示するスタック型グループ。",
+      "files": [{ "path": "registry/components/avatar-group.tsx", "type": "registry:component", "target": "components/ui/avatar-group.tsx" }]
+    }
+  ]
+}
