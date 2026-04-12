@@ -4,7 +4,7 @@ import * as React from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Search, X, MousePointerClick, LayoutGrid, BarChart3, Bell, Type } from "lucide-react";
+import { Search, X, MousePointerClick, LayoutGrid, BarChart3, Bell, Type, PanelTop } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   ComponentConfig,
@@ -19,6 +19,7 @@ const categoryIcons: Record<ComponentCategory, React.ReactNode> = {
   data: <BarChart3 className="h-3.5 w-3.5" />,
   feedback: <Bell className="h-3.5 w-3.5" />,
   typography: <Type className="h-3.5 w-3.5" />,
+  navigation: <PanelTop className="h-3.5 w-3.5" />,
 };
 
 function highlight(text: string, query: string) {

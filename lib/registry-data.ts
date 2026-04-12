@@ -1,4 +1,4 @@
-export type ComponentCategory = "buttons" | "cards" | "data" | "feedback" | "typography";
+export type ComponentCategory = "buttons" | "cards" | "data" | "feedback" | "typography" | "navigation";
 
 export interface PropDef {
   name: string;
@@ -24,6 +24,7 @@ export const categoryLabels: Record<ComponentCategory, string> = {
   data: "データ表示",
   feedback: "フィードバック",
   typography: "テキスト",
+  navigation: "ナビゲーション",
 };
 
 export const components: ComponentConfig[] = [
@@ -806,6 +807,141 @@ export default function Example() {
     { id: "4", title: "名前を付けて保存" },
     { id: "5", title: "印刷" },
   ]}
+/>`,
+      },
+    ],
+  },
+  {
+    name: "site-header",
+    title: "Site Header",
+    description: "ロゴ・ナビゲーションリンク・アクションエリアを持つサイトヘッダーコンポーネント。sticky・backdrop-blur 対応。",
+    category: "navigation",
+    filePath: "registry/components/site-header.tsx",
+    props: [
+      { name: "logo", type: "React.ReactNode", description: "ロゴ画像やアイコン" },
+      { name: "title", type: "string", default: '"My App"', description: "サイト名テキスト" },
+      { name: "nav", type: "{ label: string; href: string }[]", default: "[]", description: "ナビゲーションリンクの配列" },
+      { name: "actions", type: "React.ReactNode", description: "右端に表示するボタン等のアクション要素" },
+      { name: "sticky", type: "boolean", default: "false", description: "スクロール時にヘッダーを固定するか" },
+      { name: "bordered", type: "boolean", default: "true", description: "下部ボーダーを表示するか" },
+      { name: "blurred", type: "boolean", default: "true", description: "backdrop-blur を適用するか" },
+      { name: "className", type: "string", description: "追加のCSSクラス" },
+    ],
+    usage: `import { SiteHeader } from "@/components/ui/site-header"
+
+export default function Example() {
+  return (
+    <SiteHeader
+      title="My App"
+      nav={[
+        { label: "ホーム", href: "/" },
+        { label: "ドキュメント", href: "/docs" },
+      ]}
+      sticky
+    />
+  )
+}`,
+    examples: [
+      {
+        label: "Basic",
+        code: `<SiteHeader title="My App" />`,
+      },
+      {
+        label: "With nav links",
+        code: `<SiteHeader
+  title="My App"
+  nav={[
+    { label: "ホーム", href: "/" },
+    { label: "ドキュメント", href: "/docs" },
+    { label: "ブログ", href: "/blog" },
+  ]}
+/>`,
+      },
+      {
+        label: "With actions",
+        code: `<SiteHeader
+  title="My App"
+  nav={[{ label: "ドキュメント", href: "/docs" }]}
+  actions={
+    <button className="rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground">
+      ログイン
+    </button>
+  }
+  sticky
+/>`,
+      },
+    ],
+  },
+  {
+    name: "site-footer",
+    title: "Site Footer",
+    description: "ロゴ・説明文・リンクセクション・コピーライトを持つサイトフッターコンポーネント。",
+    category: "navigation",
+    filePath: "registry/components/site-footer.tsx",
+    props: [
+      { name: "logo", type: "React.ReactNode", description: "ロゴ画像やアイコン" },
+      { name: "description", type: "string", description: "ブランド説明文" },
+      { name: "sections", type: "{ heading: string; links: { label: string; href: string }[] }[]", default: "[]", description: "リンクセクションの配列" },
+      { name: "copyright", type: "string", description: "コピーライト文（省略時は自動生成）" },
+      { name: "bordered", type: "boolean", default: "true", description: "上部ボーダーを表示するか" },
+      { name: "className", type: "string", description: "追加のCSSクラス" },
+    ],
+    usage: `import { SiteFooter } from "@/components/ui/site-footer"
+
+export default function Example() {
+  return (
+    <SiteFooter
+      logo="My App"
+      description="shadcn registry を使ったコンポーネントライブラリ。"
+      sections={[
+        {
+          heading: "プロダクト",
+          links: [
+            { label: "機能", href: "/features" },
+            { label: "料金", href: "/pricing" },
+          ],
+        },
+      ]}
+      copyright="© 2026 My App. All rights reserved."
+    />
+  )
+}`,
+    examples: [
+      {
+        label: "Minimal",
+        code: `<SiteFooter copyright="© 2026 My App. All rights reserved." />`,
+      },
+      {
+        label: "With brand",
+        code: `<SiteFooter
+  logo="My App"
+  description="shadcn registry を使ったコンポーネントライブラリ。"
+  copyright="© 2026 My App."
+/>`,
+      },
+      {
+        label: "Full layout",
+        code: `<SiteFooter
+  logo="My App"
+  description="オープンソースのコンポーネントコレクション。"
+  sections={[
+    {
+      heading: "プロダクト",
+      links: [
+        { label: "機能", href: "/features" },
+        { label: "料金", href: "/pricing" },
+        { label: "変更履歴", href: "/changelog" },
+      ],
+    },
+    {
+      heading: "リソース",
+      links: [
+        { label: "ドキュメント", href: "/docs" },
+        { label: "GitHub", href: "https://github.com" },
+      ],
+    },
+  ]}
+  copyright="© 2026 My App. All rights reserved."
 />`,
       },
     ],
