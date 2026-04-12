@@ -93,7 +93,10 @@ export default async function ComponentPage({ params }: PageProps) {
 			{/* Usage */}
 			<section className="mb-8">
 				<h2 className="text-sm font-semibold mb-3">使い方</h2>
-				<div className="rounded-lg border overflow-hidden">
+				<div className="group relative rounded-lg border overflow-hidden">
+					<div className="absolute right-3 top-3 z-10 opacity-0 transition-opacity group-hover:opacity-100">
+						<CopyButton value={comp.usage} />
+					</div>
 					<div
 						className="text-sm [&>pre]:overflow-auto [&>pre]:p-4 [&>pre]:leading-relaxed"
 						dangerouslySetInnerHTML={{ __html: usageHtml }}
@@ -187,7 +190,10 @@ export default async function ComponentPage({ params }: PageProps) {
 			{/* Source */}
 			<section>
 				<h2 className="text-sm font-semibold mb-3">ソースコード</h2>
-				<div className="rounded-lg border overflow-hidden">
+				<div className="group relative rounded-lg border overflow-hidden">
+					<div className="absolute right-3 top-3 z-10 opacity-0 transition-opacity group-hover:opacity-100">
+						<CopyButton value={source} />
+					</div>
 					<div
 						className="text-sm [&>pre]:overflow-auto [&>pre]:max-h-[500px] [&>pre]:p-4 [&>pre]:leading-relaxed"
 						dangerouslySetInnerHTML={{ __html: sourceHtml }}
