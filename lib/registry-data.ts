@@ -985,19 +985,21 @@ export default function BlogIndex() {
     examples: [
       {
         label: "Default",
-        code: `<ArticleCard
-  title="Next.js App Router 入門"
-  excerpt="App Router の基本的な使い方から、ルートグループ、レイアウト、サーバーコンポーネントまで解説します。"
-  date="2026-04-12"
-  tags={["Next.js"]}
-  className="max-w-sm"
-/>`,
+        code: `<div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {[
+    { title: "Next.js App Router 入門", excerpt: "App Router の基本的な使い方から、ルートグループ、レイアウト、サーバーコンポーネントまで丁寧に解説します。", date: "2026-04-12", tags: ["Next.js"] },
+    { title: "Tailwind CSS v4 の新機能まとめ", excerpt: "v4 で刷新されたユーティリティ、コンテナクエリ、@layer の変更点を実例とともに紹介します。", date: "2026-04-10", tags: ["CSS"] },
+    { title: "TypeScript 5.5 リリースノート", excerpt: "型推論の強化、satisfies の改善、新しいユーティリティ型など注目アップデートを解説します。", date: "2026-04-08", tags: ["TypeScript"] },
+  ].map((post) => (
+    <ArticleCard key={post.title} {...post} href="/blog" />
+  ))}
+</div>`,
       },
       {
         label: "Horizontal",
-        code: `<div className="space-y-2 max-w-lg">
+        code: `<div className="w-full space-y-2">
   {[
-    { title: "Tailwind CSS v4 の新機能", date: "2026-04-10", tags: ["CSS"] },
+    { title: "Tailwind CSS v4 の新機能まとめ", date: "2026-04-10", tags: ["CSS"] },
     { title: "TypeScript 5.5 リリースノート", date: "2026-04-08", tags: ["TypeScript"] },
     { title: "React 19 で変わること", date: "2026-04-05", tags: ["React"] },
   ].map((post) => (
@@ -1007,9 +1009,9 @@ export default function BlogIndex() {
       },
       {
         label: "Minimal list",
-        code: `<div className="max-w-md">
+        code: `<div className="w-full">
   {[
-    { title: "Tailwind CSS v4 の新機能", date: "2026-04-10", tags: ["CSS"] },
+    { title: "Tailwind CSS v4 の新機能まとめ", date: "2026-04-10", tags: ["CSS"] },
     { title: "TypeScript 5.5 リリースノート", date: "2026-04-08", tags: ["TypeScript"] },
     { title: "React 19 で変わること", date: "2026-04-05", tags: ["React"] },
   ].map((post) => (
