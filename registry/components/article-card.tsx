@@ -42,14 +42,14 @@ export function ArticleCard({
         <div className="w-1 shrink-0 bg-gradient-to-b from-primary/60 to-primary/20 transition-all duration-300 group-hover:from-primary group-hover:to-primary/40" />
 
         {/* content */}
-        <div className="flex min-w-0 flex-1 flex-col justify-between gap-3 p-4">
+        <div className="flex min-w-0 flex-1 flex-col justify-between gap-3 p-3 sm:p-4">
           <div className="space-y-1.5">
             {tag && (
               <span className="text-xs font-semibold uppercase tracking-widest text-primary/70">
                 {tag}
               </span>
             )}
-            <h3 className="line-clamp-2 font-bold leading-snug tracking-tight transition-colors group-hover:text-primary">
+            <h3 className="line-clamp-2 text-sm font-bold leading-snug tracking-tight transition-colors group-hover:text-primary sm:text-base">
               {title}
             </h3>
           </div>
@@ -61,7 +61,7 @@ export function ArticleCard({
 
         {/* image */}
         {coverImage && (
-          <div className="w-24 shrink-0 overflow-hidden sm:w-32">
+          <div className="hidden w-20 shrink-0 overflow-hidden sm:block sm:w-28 md:w-32">
             <img
               src={coverImage}
               alt={title}
@@ -79,13 +79,13 @@ export function ArticleCard({
       <Wrapper
         {...wrapperProps}
         className={cn(
-          "group grid grid-cols-[auto_1fr_auto] items-center gap-4 border-b border-border/40 py-5 last:border-b-0",
+          "group grid grid-cols-[1fr_auto] items-center gap-3 border-b border-border/40 py-4 last:border-b-0 sm:grid-cols-[auto_1fr_auto] sm:gap-4 sm:py-5",
           href && "cursor-pointer",
           className
         )}
       >
-        {/* date column */}
-        <div className="w-14 shrink-0 text-right">
+        {/* date column — hidden on mobile */}
+        <div className="hidden w-14 shrink-0 text-right sm:block">
           {date ? (
             <span className="font-mono text-xs tabular-nums text-muted-foreground/60">
               {date}
@@ -95,14 +95,21 @@ export function ArticleCard({
           )}
         </div>
 
-        {/* title + tag */}
+        {/* title + tag + date on mobile */}
         <div className="min-w-0 space-y-0.5">
-          {tag && (
-            <span className="text-[10px] font-semibold uppercase tracking-widest text-primary/60">
-              {tag}
-            </span>
-          )}
-          <h3 className="truncate font-semibold leading-snug transition-colors group-hover:text-primary">
+          <div className="flex items-center gap-2">
+            {tag && (
+              <span className="text-[10px] font-semibold uppercase tracking-widest text-primary/60">
+                {tag}
+              </span>
+            )}
+            {date && (
+              <span className="font-mono text-[10px] tabular-nums text-muted-foreground/50 sm:hidden">
+                {date}
+              </span>
+            )}
+          </div>
+          <h3 className="truncate text-sm font-semibold leading-snug transition-colors group-hover:text-primary sm:text-base">
             {title}
           </h3>
         </div>
@@ -135,13 +142,13 @@ export function ArticleCard({
       </div>
 
       {/* body */}
-      <div className="flex flex-1 flex-col gap-3 p-5">
+      <div className="flex flex-1 flex-col gap-3 p-4 sm:p-5">
         {tag && (
           <span className="text-[11px] font-semibold uppercase tracking-widest text-primary/70">
             {tag}
           </span>
         )}
-        <h3 className="line-clamp-2 text-xl font-bold leading-snug tracking-tight transition-colors group-hover:text-primary">
+        <h3 className="line-clamp-2 text-lg font-bold leading-snug tracking-tight transition-colors group-hover:text-primary sm:text-xl">
           {title}
         </h3>
         {excerpt && (

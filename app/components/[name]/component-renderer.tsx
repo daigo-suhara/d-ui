@@ -441,15 +441,16 @@ const previews: Record<ComponentName, React.ReactNode[]> = {
     />,
   ],
   "article-card": [
-    <ArticleCard
-      key="0"
-      title="Next.js App Router 入門"
-      excerpt="App Router の基本的な使い方から、ルートグループ、レイアウト、サーバーコンポーネントまで丁寧に解説します。"
-      date="2026-04-12"
-      tags={["Next.js"]}
-      className="max-w-sm"
-    />,
-    <div className="space-y-2 w-full max-w-lg" key="1">
+    <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3" key="0">
+      {[
+        { title: "Next.js App Router 入門", excerpt: "App Router の基本的な使い方から、ルートグループ、レイアウト、サーバーコンポーネントまで丁寧に解説します。", date: "2026-04-12", tags: ["Next.js"] },
+        { title: "Tailwind CSS v4 の新機能まとめ", excerpt: "v4 で刷新されたユーティリティ、コンテナクエリ、@layer の変更点を実例とともに紹介します。", date: "2026-04-10", tags: ["CSS"] },
+        { title: "TypeScript 5.5 リリースノート", excerpt: "型推論の強化、satisfies の改善、新しいユーティリティ型など注目アップデートを解説します。", date: "2026-04-08", tags: ["TypeScript"] },
+      ].map((post) => (
+        <ArticleCard key={post.title} {...post} href="/blog" />
+      ))}
+    </div>,
+    <div className="w-full space-y-2" key="1">
       {[
         { title: "Tailwind CSS v4 の新機能まとめ", date: "2026-04-10", tags: ["CSS"]  },
         { title: "TypeScript 5.5 リリースノート", date: "2026-04-08", tags: ["TypeScript"] },
@@ -458,7 +459,7 @@ const previews: Record<ComponentName, React.ReactNode[]> = {
         <ArticleCard key={post.title} variant="horizontal" {...post} href="/blog" />
       ))}
     </div>,
-    <div className="w-full max-w-md" key="2">
+    <div className="w-full" key="2">
       {[
         { title: "Tailwind CSS v4 の新機能まとめ", date: "2026-04-10", tags: ["CSS"] },
         { title: "TypeScript 5.5 リリースノート", date: "2026-04-08", tags: ["TypeScript"] },
