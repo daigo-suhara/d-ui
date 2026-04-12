@@ -236,6 +236,45 @@
 					"target": "components/ui/search-dialog.tsx"
 				}
 			]
+		},
+		{
+			"name": "article-card",
+			"type": "registry:component",
+			"title": "Article Card",
+			"description": "ブログ記事の一覧表示に使えるカード。タイトル・抜粋・著者・日付・タグ・読了時間に対応。",
+			"files": [
+				{
+					"path": "registry/components/article-card.tsx",
+					"type": "registry:component",
+					"target": "components/ui/article-card.tsx"
+				}
+			]
+		},
+		{
+			"name": "reading-progress",
+			"type": "registry:component",
+			"title": "Reading Progress",
+			"description": "ページのスクロール量に応じて進捗を表示する固定バー。ブログ記事の読了状況確認に便利。",
+			"files": [
+				{
+					"path": "registry/components/reading-progress.tsx",
+					"type": "registry:component",
+					"target": "components/ui/reading-progress.tsx"
+				}
+			]
+		},
+		{
+			"name": "table-of-contents",
+			"type": "registry:component",
+			"title": "Table of Contents",
+			"description": "記事内の見出しをナビゲートする目次コンポーネント。スクロール位置に連動してアクティブ項目をハイライト。",
+			"files": [
+				{
+					"path": "registry/components/table-of-contents.tsx",
+					"type": "registry:component",
+					"target": "components/ui/table-of-contents.tsx"
+				}
+			]
 		}
 	]
 }

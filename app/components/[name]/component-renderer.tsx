@@ -21,6 +21,9 @@ import { StepIndicator } from "@/registry/components/step-indicator";
 import { SearchDialog } from "@/registry/components/search-dialog";
 import { SiteHeader } from "@/registry/components/site-header";
 import { SiteFooter } from "@/registry/components/site-footer";
+import { ArticleCard } from "@/registry/components/article-card";
+import { ReadingProgress } from "@/registry/components/reading-progress";
+import { TableOfContents } from "@/registry/components/table-of-contents";
 import { Users, TrendingUp, ShoppingCart, Activity } from "lucide-react";
 
 type ComponentName =
@@ -43,7 +46,10 @@ type ComponentName =
   | "step-indicator"
   | "search-dialog"
   | "site-header"
-  | "site-footer";
+  | "site-footer"
+  | "article-card"
+  | "reading-progress"
+  | "table-of-contents";
 
 function SegmentedDemo() {
   const [v, setV] = React.useState("list");
@@ -432,6 +438,96 @@ const previews: Record<ComponentName, React.ReactNode[]> = {
         },
       ]}
       copyright="© 2026 My App. All rights reserved."
+    />,
+  ],
+  "article-card": [
+    <ArticleCard
+      key="0"
+      title="Next.js App Router 入門"
+      excerpt="App Router の基本的な使い方から、ルートグループ、レイアウト、サーバーコンポーネントまで丁寧に解説します。"
+      date="2026-04-12"
+      tags={["Next.js"]}
+      className="max-w-sm"
+    />,
+    <div className="space-y-2 w-full max-w-lg" key="1">
+      {[
+        { title: "Tailwind CSS v4 の新機能まとめ", date: "2026-04-10", tags: ["CSS"]  },
+        { title: "TypeScript 5.5 リリースノート", date: "2026-04-08", tags: ["TypeScript"] },
+        { title: "React 19 で変わること", date: "2026-04-05", tags: ["React"] },
+      ].map((post) => (
+        <ArticleCard key={post.title} variant="horizontal" {...post} href="/blog" />
+      ))}
+    </div>,
+    <div className="w-full max-w-md" key="2">
+      {[
+        { title: "Tailwind CSS v4 の新機能まとめ", date: "2026-04-10", tags: ["CSS"] },
+        { title: "TypeScript 5.5 リリースノート", date: "2026-04-08", tags: ["TypeScript"] },
+        { title: "React 19 で変わること", date: "2026-04-05", tags: ["React"] },
+      ].map((post) => (
+        <ArticleCard key={post.title} variant="minimal" {...post} href="/blog" />
+      ))}
+    </div>,
+  ],
+  "reading-progress": [
+    <div className="w-full space-y-3" key="0">
+      <p className="text-xs text-muted-foreground">スクロール進捗バー（固定表示）のプレビュー：</p>
+      {(["primary", "blue", "green", "purple", "orange", "pink"] as const).map((color, i) => (
+        <div key={color} className="flex items-center gap-3">
+          <span className="w-16 text-xs text-muted-foreground">{color}</span>
+          <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted">
+            <div
+              className={[
+                "h-full rounded-full",
+                color === "primary" ? "bg-primary" :
+                color === "blue" ? "bg-blue-500" :
+                color === "green" ? "bg-emerald-500" :
+                color === "purple" ? "bg-violet-500" :
+                color === "orange" ? "bg-orange-500" :
+                "bg-pink-500",
+              ].join(" ")}
+              style={{ width: `${40 + i * 10}%` }}
+            />
+          </div>
+          <span className="w-8 text-right text-xs text-muted-foreground">{40 + i * 10}%</span>
+        </div>
+      ))}
+    </div>,
+    <div className="relative w-full overflow-hidden rounded-lg border bg-muted/20" key="1">
+      <div className="h-1 w-2/3 bg-primary" />
+      <div className="space-y-2 p-4">
+        <p className="text-sm font-medium">記事タイトル</p>
+        <p className="text-xs text-muted-foreground">上部のバーがスクロール読了率を示します。</p>
+      </div>
+    </div>,
+  ],
+  "table-of-contents": [
+    <TableOfContents
+      key="0"
+      activeId="setup"
+      items={[
+        { id: "intro", label: "はじめに" },
+        { id: "setup", label: "セットアップ" },
+        { id: "install", label: "インストール", level: 2 },
+        { id: "config", label: "設定", level: 2 },
+        { id: "usage", label: "使い方" },
+        { id: "examples", label: "サンプル", level: 2 },
+        { id: "advanced", label: "応用" },
+      ]}
+      className="w-48"
+    />,
+    <TableOfContents
+      key="1"
+      activeId="examples"
+      items={[
+        { id: "overview", label: "概要" },
+        { id: "install", label: "インストール" },
+        { id: "usage", label: "使い方" },
+        { id: "examples", label: "サンプルコード" },
+        { id: "props", label: "Props リファレンス", level: 2 },
+        { id: "faq", label: "よくある質問" },
+      ]}
+      title="この記事の内容"
+      className="w-52"
     />,
   ],
   "step-indicator": [
