@@ -75,11 +75,11 @@ export function ComponentPreviewClient({
 
         <TabsContent value="code" className="mt-2">
           <div className="group relative overflow-hidden rounded-lg border border-border/50">
-            <div className="absolute right-3 top-3 z-10 opacity-0 transition-opacity group-hover:opacity-100">
+            <div className="absolute right-2 top-2 z-10 opacity-100 md:opacity-0 md:transition-opacity md:group-hover:opacity-100">
               <CopyButton value={examples[activeExample]?.code ?? ""} />
             </div>
             <div
-              className="overflow-auto text-sm [&>pre]:overflow-auto [&>pre]:p-4 [&>pre]:leading-relaxed [&>pre]:rounded-lg"
+              className="[&>pre]:overflow-auto [&>pre]:p-3 [&>pre]:text-xs [&>pre]:leading-relaxed [&>pre]:rounded-lg md:[&>pre]:p-4 md:[&>pre]:text-sm"
               dangerouslySetInnerHTML={{
                 __html: examples[activeExample]?.codeHtml ?? "",
               }}

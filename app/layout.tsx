@@ -4,6 +4,7 @@ import "./globals.css";
 import { ExternalLink, Package2 } from "lucide-react";
 import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
+import { MobileNav } from "@/components/mobile-nav";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { components, getComponentsByCategory } from "@/lib/registry-data";
 
@@ -31,9 +32,9 @@ export default function RootLayout({
 				className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
 			>
 				<TooltipProvider>
-					<div className="flex h-screen overflow-hidden">
-						{/* Sidebar */}
-						<aside className="flex w-56 shrink-0 flex-col border-r border-border/60 bg-card/30 backdrop-blur-sm">
+					<div className="flex h-screen flex-col overflow-hidden md:flex-row">
+						{/* Sidebar — desktop only */}
+						<aside className="hidden md:flex w-56 shrink-0 flex-col border-r border-border/60 bg-card/30 backdrop-blur-sm">
 							{/* Logo */}
 							<div className="flex h-13 items-center gap-2.5 border-b border-border/60 px-4 py-3.5">
 								<div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary/90 shadow-sm">
@@ -65,6 +66,9 @@ export default function RootLayout({
 								</a>
 							</div>
 						</aside>
+
+						{/* Mobile header */}
+						<MobileNav grouped={grouped} />
 
 						{/* Main content */}
 						<main className="flex-1 overflow-y-auto">{children}</main>

@@ -44,7 +44,7 @@ export default async function ComponentPage({ params }: PageProps) {
 	]);
 
 	return (
-		<div className="mx-auto max-w-3xl px-6 py-8">
+		<div className="mx-auto max-w-3xl px-4 py-6 md:px-6 md:py-8">
 			{/* Header */}
 			<div className="mb-6">
 				<div className="flex items-center gap-2 mb-2.5">
@@ -94,11 +94,11 @@ export default async function ComponentPage({ params }: PageProps) {
 			<section className="mb-8">
 				<h2 className="text-sm font-semibold mb-3">使い方</h2>
 				<div className="group relative rounded-lg border overflow-hidden">
-					<div className="absolute right-3 top-3 z-10 opacity-0 transition-opacity group-hover:opacity-100">
+					<div className="absolute right-2 top-2 z-10 opacity-100 md:opacity-0 md:transition-opacity md:group-hover:opacity-100">
 						<CopyButton value={comp.usage} />
 					</div>
 					<div
-						className="text-sm [&>pre]:overflow-auto [&>pre]:p-4 [&>pre]:leading-relaxed"
+						className="[&>pre]:overflow-auto [&>pre]:p-3 [&>pre]:text-xs [&>pre]:leading-relaxed md:[&>pre]:p-4 md:[&>pre]:text-sm"
 						dangerouslySetInnerHTML={{ __html: usageHtml }}
 					/>
 				</div>
@@ -108,7 +108,42 @@ export default async function ComponentPage({ params }: PageProps) {
 			{comp.props.length > 0 && (
 				<section className="mb-8">
 					<h2 className="text-sm font-semibold mb-3">プロパティ</h2>
-					<div className="rounded-xl border overflow-hidden">
+
+					{/* モバイル: カードリスト */}
+					<div className="flex flex-col gap-2 md:hidden">
+						{comp.props.map((prop) => {
+							const isRequired = prop.default === undefined;
+							return (
+								<div key={prop.name} className="rounded-lg border border-border/60 bg-muted/20 p-3 space-y-2">
+									<div className="flex items-center gap-2 flex-wrap">
+										<code className="font-mono font-semibold text-sm text-foreground">{prop.name}</code>
+										{isRequired ? (
+											<span className="text-[9px] font-semibold px-1.5 py-px rounded border border-rose-500/40 text-rose-400 bg-rose-500/5 leading-none tracking-wide">
+												必須
+											</span>
+										) : (
+											<span className="text-[9px] font-medium px-1.5 py-px rounded border border-border text-muted-foreground/60 leading-none tracking-wide">
+												任意
+											</span>
+										)}
+									</div>
+									<code className="block font-mono text-[11px] text-violet-400 bg-violet-500/8 px-2 py-1.5 rounded border border-violet-500/15 break-all leading-relaxed">
+										{prop.type}
+									</code>
+									<p className="text-xs text-muted-foreground leading-relaxed">{prop.description}</p>
+									{prop.default !== undefined && (
+										<div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+											<span>デフォルト:</span>
+											<code className="font-mono text-[11px] bg-muted px-1.5 py-0.5 rounded">{prop.default}</code>
+										</div>
+									)}
+								</div>
+							);
+						})}
+					</div>
+
+					{/* デスクトップ: テーブル */}
+					<div className="hidden md:block rounded-xl border overflow-hidden">
 						<table className="w-full text-xs border-collapse">
 							<thead>
 								<tr className="bg-muted/40 border-b border-border/60">
@@ -191,11 +226,11 @@ export default async function ComponentPage({ params }: PageProps) {
 			<section>
 				<h2 className="text-sm font-semibold mb-3">ソースコード</h2>
 				<div className="group relative rounded-lg border overflow-hidden">
-					<div className="absolute right-3 top-3 z-10 opacity-0 transition-opacity group-hover:opacity-100">
+					<div className="absolute right-2 top-2 z-10 opacity-100 md:opacity-0 md:transition-opacity md:group-hover:opacity-100">
 						<CopyButton value={source} />
 					</div>
 					<div
-						className="text-sm [&>pre]:overflow-auto [&>pre]:max-h-[500px] [&>pre]:p-4 [&>pre]:leading-relaxed"
+						className="[&>pre]:overflow-auto [&>pre]:max-h-[360px] [&>pre]:p-3 [&>pre]:text-xs [&>pre]:leading-relaxed md:[&>pre]:max-h-[500px] md:[&>pre]:p-4 md:[&>pre]:text-sm"
 						dangerouslySetInnerHTML={{ __html: sourceHtml }}
 					/>
 				</div>
