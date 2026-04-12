@@ -9,7 +9,7 @@ import {
   categoryLabels,
   ComponentConfig,
 } from "@/lib/registry-data";
-import { Search, MousePointerClick, LayoutGrid, BarChart3, Bell, Type, Home } from "lucide-react";
+import { Search, MousePointerClick, LayoutGrid, BarChart3, Bell, Type, Home, PanelTop } from "lucide-react";
 import { SearchDialog } from "@/components/search-dialog";
 
 interface SiteNavProps {
@@ -22,6 +22,7 @@ const categoryOrder: ComponentCategory[] = [
   "data",
   "feedback",
   "typography",
+  "navigation",
 ];
 
 const categoryIcons: Record<ComponentCategory, React.ReactNode> = {
@@ -30,6 +31,7 @@ const categoryIcons: Record<ComponentCategory, React.ReactNode> = {
   data: <BarChart3 className="h-3.5 w-3.5" />,
   feedback: <Bell className="h-3.5 w-3.5" />,
   typography: <Type className="h-3.5 w-3.5" />,
+  navigation: <PanelTop className="h-3.5 w-3.5" />,
 };
 
 export function SiteNav({ grouped }: SiteNavProps) {

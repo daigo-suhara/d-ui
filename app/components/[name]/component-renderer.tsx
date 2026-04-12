@@ -19,6 +19,8 @@ import { FlipCard } from "@/registry/components/flip-card";
 import { MagneticButton } from "@/registry/components/magnetic-button";
 import { StepIndicator } from "@/registry/components/step-indicator";
 import { SearchDialog } from "@/registry/components/search-dialog";
+import { SiteHeader } from "@/registry/components/site-header";
+import { SiteFooter } from "@/registry/components/site-footer";
 import { Users, TrendingUp, ShoppingCart, Activity } from "lucide-react";
 
 type ComponentName =
@@ -39,7 +41,9 @@ type ComponentName =
   | "flip-card"
   | "magnetic-button"
   | "step-indicator"
-  | "search-dialog";
+  | "search-dialog"
+  | "site-header"
+  | "site-footer";
 
 function SegmentedDemo() {
   const [v, setV] = React.useState("list");
@@ -373,6 +377,61 @@ const previews: Record<ComponentName, React.ReactNode[]> = {
         { id: "4", title: "名前を付けて保存" },
         { id: "5", title: "印刷" },
       ]}
+    />,
+  ],
+  "site-header": [
+    <SiteHeader key="0" title="My App" />,
+    <SiteHeader
+      key="1"
+      title="My App"
+      nav={[
+        { label: "ホーム", href: "/" },
+        { label: "ドキュメント", href: "/docs" },
+        { label: "ブログ", href: "/blog" },
+      ]}
+    />,
+    <SiteHeader
+      key="2"
+      title="My App"
+      nav={[{ label: "ドキュメント", href: "/docs" }]}
+      actions={
+        <button className="rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground">
+          ログイン
+        </button>
+      }
+      sticky
+    />,
+  ],
+  "site-footer": [
+    <SiteFooter key="0" copyright="© 2026 My App. All rights reserved." />,
+    <SiteFooter
+      key="1"
+      logo="My App"
+      description="shadcn registry を使ったコンポーネントライブラリ。"
+      copyright="© 2026 My App."
+    />,
+    <SiteFooter
+      key="2"
+      logo="My App"
+      description="オープンソースのコンポーネントコレクション。"
+      sections={[
+        {
+          heading: "プロダクト",
+          links: [
+            { label: "機能", href: "#" },
+            { label: "料金", href: "#" },
+            { label: "変更履歴", href: "#" },
+          ],
+        },
+        {
+          heading: "リソース",
+          links: [
+            { label: "ドキュメント", href: "#" },
+            { label: "GitHub", href: "#" },
+          ],
+        },
+      ]}
+      copyright="© 2026 My App. All rights reserved."
     />,
   ],
   "step-indicator": [
