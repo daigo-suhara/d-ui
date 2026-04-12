@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ExternalLink, Package2 } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { SiteNav } from "@/components/site-nav";
 import { MobileNav } from "@/components/mobile-nav";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -37,9 +38,7 @@ export default function RootLayout({
 						<aside className="hidden md:flex w-56 shrink-0 flex-col border-r border-border/60 bg-card/30 backdrop-blur-sm">
 							{/* Logo */}
 							<div className="flex h-13 items-center gap-2.5 border-b border-border/60 px-4 py-3.5">
-								<div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary/90 shadow-sm">
-									<Package2 className="h-3.5 w-3.5 text-primary-foreground" />
-								</div>
+								<Image src="/logo.png" alt="d-ui logo" width={24} height={24} className="rounded-md" />
 								<Link href="/" className="font-semibold text-sm tracking-tight">
 									d<span className="text-primary">-ui</span>
 								</Link>
