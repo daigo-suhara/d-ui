@@ -18,6 +18,7 @@ import { Typewriter } from "@/registry/components/typewriter";
 import { FlipCard } from "@/registry/components/flip-card";
 import { MagneticButton } from "@/registry/components/magnetic-button";
 import { StepIndicator } from "@/registry/components/step-indicator";
+import { SearchDialog } from "@/registry/components/search-dialog";
 import { Users, TrendingUp, ShoppingCart, Activity } from "lucide-react";
 
 type ComponentName =
@@ -37,7 +38,8 @@ type ComponentName =
   | "typewriter"
   | "flip-card"
   | "magnetic-button"
-  | "step-indicator";
+  | "step-indicator"
+  | "search-dialog";
 
 function SegmentedDemo() {
   const [v, setV] = React.useState("list");
@@ -334,6 +336,44 @@ const previews: Record<ComponentName, React.ReactNode[]> = {
       <MagneticButton strength={30}>Normal</MagneticButton>
       <MagneticButton strength={60}>Strong</MagneticButton>
     </div>,
+  ],
+  "search-dialog": [
+    <SearchDialog
+      key="0"
+      shortcut="/"
+      items={[
+        { id: "1", title: "ダッシュボード", description: "メトリクスと概要", group: "ページ" },
+        { id: "2", title: "ユーザー管理", description: "ユーザーの追加・編集", group: "ページ" },
+        { id: "3", title: "設定", description: "アカウントと通知設定", group: "ページ" },
+        { id: "4", title: "ダークモード切替", group: "操作" },
+        { id: "5", title: "ログアウト", group: "操作" },
+      ]}
+    />,
+    <SearchDialog
+      key="1"
+      items={[
+        { id: "1", title: "React", description: "UIライブラリ" },
+        { id: "2", title: "TypeScript", description: "型安全なJS" },
+        { id: "3", title: "Next.js", description: "Reactフレームワーク" },
+      ]}
+      trigger={
+        <button className="rounded-full border px-4 py-1.5 text-sm text-muted-foreground hover:bg-muted transition-colors">
+          🔍 検索
+        </button>
+      }
+    />,
+    <SearchDialog
+      key="2"
+      placeholder="コマンドを入力…"
+      shortcut={false}
+      items={[
+        { id: "1", title: "新しいファイル" },
+        { id: "2", title: "ファイルを開く" },
+        { id: "3", title: "保存" },
+        { id: "4", title: "名前を付けて保存" },
+        { id: "5", title: "印刷" },
+      ]}
+    />,
   ],
   "step-indicator": [
     <StepIndicator

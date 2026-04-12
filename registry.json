@@ -1,7 +1,7 @@
 {
 	"$schema": "https://ui.shadcn.com/schema/registry.json",
 	"name": "d-ui",
-	"homepage": "https://ui.daigo-suhara.com",
+	"homepage": "https://d-ui.daigo-suhara.com",
 	"items": [
 		{
 			"name": "gradient-button",
@@ -221,6 +221,19 @@
 					"path": "registry/components/step-indicator.tsx",
 					"type": "registry:component",
 					"target": "components/ui/step-indicator.tsx"
+				}
+			]
+		},
+		{
+			"name": "search-dialog",
+			"type": "registry:component",
+			"title": "Search Dialog",
+			"description": "⌘K ショートカット対応の検索ダイアログ。モバイルではボトムシート、デスクトップでは中央モーダルとして表示。",
+			"files": [
+				{
+					"path": "registry/components/search-dialog.tsx",
+					"type": "registry:component",
+					"target": "components/ui/search-dialog.tsx"
 				}
 			]
 		}

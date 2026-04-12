@@ -8,9 +8,9 @@ import {
   ComponentCategory,
   categoryLabels,
   ComponentConfig,
-  components as allComponents,
 } from "@/lib/registry-data";
-import { Search, X, MousePointerClick, LayoutGrid, BarChart3, Bell, Type, Home } from "lucide-react";
+import { Search, MousePointerClick, LayoutGrid, BarChart3, Bell, Type, Home } from "lucide-react";
+import { SearchDialog } from "@/components/search-dialog";
 
 interface SiteNavProps {
   grouped: Record<ComponentCategory, ComponentConfig[]>;
@@ -34,124 +34,95 @@ const categoryIcons: Record<ComponentCategory, React.ReactNode> = {
 
 export function SiteNav({ grouped }: SiteNavProps) {
   const pathname = usePathname();
+  const [open, setOpen] = React.useState(false);
   const [query, setQuery] = React.useState("");
-  const inputRef = React.useRef<HTMLInputElement>(null);
 
-  // ⌘K でフォーカス
+  // ⌘K でダイアログを開く
   React.useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
-        inputRef.current?.focus();
+        setOpen(true);
       }
     };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
   }, []);
 
-  const filtered = query.trim()
-    ? allComponents.filter(
-        (c) =>
-          c.title.toLowerCase().includes(query.toLowerCase()) ||
-          c.description.toLowerCase().includes(query.toLowerCase()) ||
-          c.category.toLowerCase().includes(query.toLowerCase())
-      )
-    : null; // null = show all grouped
+  const closeDialog = React.useCallback(() => {
+    setOpen(false);
+    setQuery("");
+  }, []);
 
   return (
     <div className="flex flex-col h-full">
-      {/* Search */}
+      {/* Search bar — クリックでダイアログを開く */}
       <div className="px-3 pb-3">
-        <div className="relative">
-          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
-          <input
-            ref={inputRef}
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="検索… ⌘K"
-            className={cn(
-              "w-full rounded-md border bg-background/60 py-1.5 pl-8 pr-7 text-xs",
-              "placeholder:text-muted-foreground/50 focus:outline-none focus:ring-1 focus:ring-ring",
-              "transition-colors"
-            )}
-          />
-          {query && (
-            <button
-              onClick={() => setQuery("")}
-              className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <X className="h-3 w-3" />
-            </button>
+        <button
+          onClick={() => setOpen(true)}
+          className={cn(
+            "w-full flex items-center gap-2 rounded-md border bg-background/60 py-1.5 pl-2.5 pr-3 text-xs",
+            "text-muted-foreground/50 hover:text-muted-foreground hover:bg-background/80 transition-colors text-left"
           )}
-        </div>
+        >
+          <Search className="h-3.5 w-3.5 shrink-0" />
+          <span className="flex-1">検索…</span>
+          <kbd className="rounded border border-border px-1 py-0.5 font-mono text-[9px] text-muted-foreground/40">⌘K</kbd>
+        </button>
       </div>
 
-      {/* Home link */}
-      {!query && (
-        <div className="px-2 mb-3">
-          <Link
-            href="/"
-            className={cn(
-              "flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-all",
-              pathname === "/"
-                ? "bg-primary/10 text-primary"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground"
-            )}
-          >
-            <Home className={cn("h-3.5 w-3.5", pathname === "/" ? "text-primary" : "text-muted-foreground/50")} />
-            <span className={cn("text-sm", pathname === "/" && "font-medium")}>ホーム</span>
-          </Link>
-        </div>
-      )}
+      {/* Search dialog */}
+      <SearchDialog
+        open={open}
+        query={query}
+        onQueryChange={setQuery}
+        onClose={closeDialog}
+      />
 
-      {/* Results */}
+      {/* Home link */}
+      <div className="px-2 mb-3">
+        <Link
+          href="/"
+          className={cn(
+            "flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-all",
+            pathname === "/"
+              ? "bg-primary/10 text-primary"
+              : "text-muted-foreground hover:bg-muted hover:text-foreground"
+          )}
+        >
+          <Home className={cn("h-3.5 w-3.5", pathname === "/" ? "text-primary" : "text-muted-foreground/50")} />
+          <span className={cn("text-sm", pathname === "/" && "font-medium")}>ホーム</span>
+        </Link>
+      </div>
+
+      {/* Nav — カテゴリ別 */}
       <nav className="flex-1 overflow-y-auto px-2 space-y-5">
-        {filtered ? (
-          // 検索結果
-          filtered.length === 0 ? (
-            <div className="px-2 py-6 text-center">
-              <p className="text-xs text-muted-foreground">見つかりません</p>
-            </div>
-          ) : (
-            <div className="space-y-0.5">
-              <p className="mb-2 px-2 text-[10px] font-semibold tracking-wide text-muted-foreground/50">
-                {filtered.length} 件の結果
-              </p>
-              {filtered.map((comp) => (
-                <NavItem key={comp.name} comp={comp} pathname={pathname} query={query} />
-              ))}
-            </div>
-          )
-        ) : (
-          // カテゴリ別
-          categoryOrder.map((category) => {
-            const items = grouped[category];
-            if (!items?.length) return null;
-            return (
-              <div key={category}>
-                <div className="mb-1.5 flex items-center gap-1.5 px-2">
-                  <span className="text-muted-foreground/50">
-                    {categoryIcons[category]}
-                  </span>
-                  <span className="text-[10px] font-semibold tracking-wide text-muted-foreground/60 uppercase">
-                    {categoryLabels[category]}
-                  </span>
-                  <span className="ml-auto text-[9px] text-muted-foreground/40 tabular-nums">
-                    {items.length}
-                  </span>
-                </div>
-                <ul className="space-y-0.5">
-                  {items.map((comp) => (
-                    <li key={comp.name}>
-                      <NavItem comp={comp} pathname={pathname} query="" />
-                    </li>
-                  ))}
-                </ul>
+        {categoryOrder.map((category) => {
+          const items = grouped[category];
+          if (!items?.length) return null;
+          return (
+            <div key={category}>
+              <div className="mb-1.5 flex items-center gap-1.5 px-2">
+                <span className="text-muted-foreground/50">
+                  {categoryIcons[category]}
+                </span>
+                <span className="text-[10px] font-semibold tracking-wide text-muted-foreground/60 uppercase">
+                  {categoryLabels[category]}
+                </span>
+                <span className="ml-auto text-[9px] text-muted-foreground/40 tabular-nums">
+                  {items.length}
+                </span>
               </div>
-            );
-          })
-        )}
+              <ul className="space-y-0.5">
+                {items.map((comp) => (
+                  <li key={comp.name}>
+                    <NavItem comp={comp} pathname={pathname} query="" />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
       </nav>
     </div>
   );

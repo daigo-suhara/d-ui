@@ -32,7 +32,7 @@ export default async function ComponentPage({ params }: PageProps) {
 	if (!comp) notFound();
 
 	const source = await getComponentSource(comp.filePath);
-	const registryUrl = `https://ui.daigo-suhara.com/registry/${comp.name}.json`;
+	const registryUrl = `https://d-ui.daigo-suhara.com/registry/${comp.name}.json`;
 	const installCmd = `npx shadcn add ${registryUrl}`;
 
 	const shikiOpts = { lang: "tsx", theme: "github-dark-dimmed" } as const;
@@ -114,9 +114,14 @@ export default async function ComponentPage({ params }: PageProps) {
 						{comp.props.map((prop) => {
 							const isRequired = prop.default === undefined;
 							return (
-								<div key={prop.name} className="rounded-lg border border-border/60 bg-muted/20 p-3 space-y-2">
+								<div
+									key={prop.name}
+									className="rounded-lg border border-border/60 bg-muted/20 p-3 space-y-2"
+								>
 									<div className="flex items-center gap-2 flex-wrap">
-										<code className="font-mono font-semibold text-sm text-foreground">{prop.name}</code>
+										<code className="font-mono font-semibold text-sm text-foreground">
+											{prop.name}
+										</code>
 										{isRequired ? (
 											<span className="text-[9px] font-semibold px-1.5 py-px rounded border border-rose-500/40 text-rose-400 bg-rose-500/5 leading-none tracking-wide">
 												必須
@@ -130,11 +135,15 @@ export default async function ComponentPage({ params }: PageProps) {
 									<code className="block font-mono text-[11px] text-violet-400 bg-violet-500/8 px-2 py-1.5 rounded border border-violet-500/15 break-all leading-relaxed">
 										{prop.type}
 									</code>
-									<p className="text-xs text-muted-foreground leading-relaxed">{prop.description}</p>
+									<p className="text-xs text-muted-foreground leading-relaxed">
+										{prop.description}
+									</p>
 									{prop.default !== undefined && (
 										<div className="flex items-center gap-1.5 text-xs text-muted-foreground">
 											<span>デフォルト:</span>
-											<code className="font-mono text-[11px] bg-muted px-1.5 py-0.5 rounded">{prop.default}</code>
+											<code className="font-mono text-[11px] bg-muted px-1.5 py-0.5 rounded">
+												{prop.default}
+											</code>
 										</div>
 									)}
 								</div>

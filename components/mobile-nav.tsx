@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Menu, Package2 } from "lucide-react";
+import { Menu } from "lucide-react";
+import Image from "next/image";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { SiteNav } from "@/components/site-nav";
 import { components, getComponentsByCategory } from "@/lib/registry-data";
@@ -27,9 +28,7 @@ export function MobileNav({ grouped }: MobileNavProps) {
         <SheetContent side="left" showCloseButton={false} className="w-64 p-0 gap-0">
           {/* Logo */}
           <div className="flex h-13 items-center gap-2.5 border-b border-border/60 px-4">
-            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary/90 shadow-sm">
-              <Package2 className="h-3.5 w-3.5 text-primary-foreground" />
-            </div>
+            <Image src="/logo.png" alt="d-ui logo" width={24} height={24} className="rounded-md" />
             <Link
               href="/"
               className="font-semibold text-sm tracking-tight"
@@ -58,9 +57,7 @@ export function MobileNav({ grouped }: MobileNavProps) {
 
       {/* Logo */}
       <Link href="/" className="flex items-center gap-2">
-        <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary/90 shadow-sm">
-          <Package2 className="h-3.5 w-3.5 text-primary-foreground" />
-        </div>
+        <Image src="/logo.png" alt="d-ui logo" width={24} height={24} className="rounded-md" />
         <span className="font-semibold text-sm tracking-tight">
           d<span className="text-primary">-ui</span>
         </span>

@@ -741,6 +741,75 @@ export default function Example() {
       },
     ],
   },
+  {
+    name: "search-dialog",
+    title: "Search Dialog",
+    description: "⌘K ショートカット対応の検索ダイアログ。モバイルではボトムシート、デスクトップでは中央モーダルとして表示。",
+    category: "feedback",
+    filePath: "registry/components/search-dialog.tsx",
+    props: [
+      { name: "items", type: "SearchItem[]", description: "検索対象のアイテム配列（id, title, description?, group?, href?, onSelect? を持つ）" },
+      { name: "placeholder", type: "string", default: '"検索…"', description: "入力フィールドのプレースホルダー" },
+      { name: "trigger", type: "React.ReactNode", description: "カスタムトリガー要素（省略時はデフォルトボタン）" },
+      { name: "shortcut", type: 'string | false', default: '"k"', description: '⌘/Ctrl と組み合わせるキー（例: "k", "/", "p"）。false で無効化' },
+      { name: "emptyMessage", type: "string", default: '"見つかりません"', description: "検索結果が0件のときのメッセージ" },
+      { name: "className", type: "string", description: "トリガーボタンへの追加CSSクラス" },
+    ],
+    usage: `import { SearchDialog } from "@/components/ui/search-dialog"
+
+const items = [
+  { id: "1", title: "ダッシュボード", description: "概要を確認", group: "ページ", href: "/dashboard" },
+  { id: "2", title: "設定", description: "アカウント設定", group: "ページ", href: "/settings" },
+  { id: "3", title: "ログアウト", group: "操作", onSelect: () => signOut() },
+]
+
+export default function Example() {
+  return <SearchDialog items={items} />
+}`,
+    examples: [
+      {
+        label: "基本",
+        code: `<SearchDialog
+  items={[
+    { id: "1", title: "ダッシュボード", description: "メトリクスと概要", group: "ページ" },
+    { id: "2", title: "ユーザー管理", description: "ユーザーの追加・編集", group: "ページ" },
+    { id: "3", title: "設定", description: "アカウントと通知設定", group: "ページ" },
+    { id: "4", title: "ダークモード切替", group: "操作" },
+    { id: "5", title: "ログアウト", group: "操作" },
+  ]}
+/>`,
+      },
+      {
+        label: "カスタムトリガー",
+        code: `<SearchDialog
+  items={[
+    { id: "1", title: "React", description: "UIライブラリ" },
+    { id: "2", title: "TypeScript", description: "型安全なJS" },
+    { id: "3", title: "Next.js", description: "Reactフレームワーク" },
+  ]}
+  trigger={
+    <button className="rounded-full border px-4 py-1.5 text-sm text-muted-foreground hover:bg-muted transition-colors">
+      🔍 検索
+    </button>
+  }
+/>`,
+      },
+      {
+        label: "グループなし",
+        code: `<SearchDialog
+  placeholder="コマンドを入力…"
+  shortcut={false}
+  items={[
+    { id: "1", title: "新しいファイル" },
+    { id: "2", title: "ファイルを開く" },
+    { id: "3", title: "保存" },
+    { id: "4", title: "名前を付けて保存" },
+    { id: "5", title: "印刷" },
+  ]}
+/>`,
+      },
+    ],
+  },
 ];
 
 export function getComponentByName(name: string): ComponentConfig | undefined {
