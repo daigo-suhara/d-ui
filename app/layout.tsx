@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "dai/ui — コンポーネント集",
+	title: "d-ui — コンポーネント集",
 	description: "shadcn registry を使った自分専用コンポーネントライブラリ",
 };
 
@@ -41,7 +41,7 @@ export default function RootLayout({
 									<Package2 className="h-3.5 w-3.5 text-primary-foreground" />
 								</div>
 								<Link href="/" className="font-semibold text-sm tracking-tight">
-									dai<span className="text-primary">/ui</span>
+									d<span className="text-primary">-ui</span>
 								</Link>
 							</div>
 

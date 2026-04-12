@@ -35,7 +35,7 @@ export function MobileNav({ grouped }: MobileNavProps) {
               className="font-semibold text-sm tracking-tight"
               onClick={() => setOpen(false)}
             >
-              dai<span className="text-primary">/ui</span>
+              d<span className="text-primary">-ui</span>
             </Link>
           </div>
 
@@ -62,7 +62,7 @@ export function MobileNav({ grouped }: MobileNavProps) {
           <Package2 className="h-3.5 w-3.5 text-primary-foreground" />
         </div>
         <span className="font-semibold text-sm tracking-tight">
-          dai<span className="text-primary">/ui</span>
+          d<span className="text-primary">-ui</span>
         </span>
       </Link>
     </header>

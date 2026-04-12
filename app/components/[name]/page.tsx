@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: PageProps) {
 	const { name } = await params;
 	const comp = getComponentByName(name);
 	if (!comp) return {};
-	return { title: `${comp.title} — dai/ui` };
+	return { title: `${comp.title} — d-ui` };
 }
 
 export default async function ComponentPage({ params }: PageProps) {

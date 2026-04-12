@@ -1,6 +1,5 @@
-import { redirect } from "next/navigation";
-import { components } from "@/lib/registry-data";
+import { HomeClient } from "@/components/home-client";
 
 export default function Home() {
-  redirect(`/components/${components[0].name}`);
+  return <HomeClient />;
 }

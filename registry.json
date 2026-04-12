@@ -1,6 +1,6 @@
 {
 	"$schema": "https://ui.shadcn.com/schema/registry.json",
-	"name": "dai-ui",
+	"name": "d-ui",
 	"homepage": "https://ui.daigo-suhara.com",
 	"items": [
 		{

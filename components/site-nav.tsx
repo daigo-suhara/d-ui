@@ -10,7 +10,7 @@ import {
   ComponentConfig,
   components as allComponents,
 } from "@/lib/registry-data";
-import { Search, X, MousePointerClick, LayoutGrid, BarChart3, Bell, Type } from "lucide-react";
+import { Search, X, MousePointerClick, LayoutGrid, BarChart3, Bell, Type, Home } from "lucide-react";
 
 interface SiteNavProps {
   grouped: Record<ComponentCategory, ComponentConfig[]>;
@@ -86,6 +86,24 @@ export function SiteNav({ grouped }: SiteNavProps) {
           )}
         </div>
       </div>
+
+      {/* Home link */}
+      {!query && (
+        <div className="px-2 mb-3">
+          <Link
+            href="/"
+            className={cn(
+              "flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-all",
+              pathname === "/"
+                ? "bg-primary/10 text-primary"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+            )}
+          >
+            <Home className={cn("h-3.5 w-3.5", pathname === "/" ? "text-primary" : "text-muted-foreground/50")} />
+            <span className={cn("text-sm", pathname === "/" && "font-medium")}>ホーム</span>
+          </Link>
+        </div>
+      )}
 
       {/* Results */}
       <nav className="flex-1 overflow-y-auto px-2 space-y-5">
