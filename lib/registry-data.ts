@@ -946,6 +946,198 @@ export default function Example() {
       },
     ],
   },
+  // ── Article Card ────────────────────────────────────────────────
+  {
+    name: "article-card",
+    title: "Article Card",
+    description: "ブログ記事の一覧表示に使えるカード。タグ・日付・抜粋・カバー画像に対応し、default / horizontal / minimal の3バリアントを持つ。",
+    category: "cards",
+    filePath: "registry/components/article-card.tsx",
+    props: [
+      { name: "title", type: "string", description: "記事タイトル" },
+      { name: "excerpt", type: "string", description: "記事の抜粋（defaultバリアントで本文2行表示）" },
+      { name: "date", type: "string", description: "公開日（例: 2026-04-12）" },
+      { name: "tags", type: "string[]", description: "タグの配列。先頭の1件のみ表示される" },
+      { name: "coverImage", type: "string", description: "カバー画像のURL。省略時はグラデーションプレースホルダーを表示" },
+      { name: "href", type: "string", description: "カードのリンク先URL。指定すると <a> タグでレンダリングされる" },
+      { name: "variant", type: '"default" | "horizontal" | "minimal"', default: '"default"', description: "レイアウトバリアント。用途に合わせて選択する" },
+      { name: "className", type: "string", description: "追加のCSSクラス" },
+    ],
+    usage: `import { ArticleCard } from "@/components/ui/article-card"
+
+export default function BlogIndex() {
+  return (
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => (
+        <ArticleCard
+          key={post.slug}
+          title={post.title}
+          excerpt={post.excerpt}
+          date={post.date}
+          tags={post.tags}
+          coverImage={post.coverImage}
+          href={\`/blog/\${post.slug}\`}
+        />
+      ))}
+    </div>
+  )
+}`,
+    examples: [
+      {
+        label: "Default",
+        code: `<ArticleCard
+  title="Next.js App Router 入門"
+  excerpt="App Router の基本的な使い方から、ルートグループ、レイアウト、サーバーコンポーネントまで解説します。"
+  date="2026-04-12"
+  tags={["Next.js"]}
+  className="max-w-sm"
+/>`,
+      },
+      {
+        label: "Horizontal",
+        code: `<div className="space-y-2 max-w-lg">
+  {[
+    { title: "Tailwind CSS v4 の新機能", date: "2026-04-10", tags: ["CSS"] },
+    { title: "TypeScript 5.5 リリースノート", date: "2026-04-08", tags: ["TypeScript"] },
+    { title: "React 19 で変わること", date: "2026-04-05", tags: ["React"] },
+  ].map((post) => (
+    <ArticleCard key={post.title} variant="horizontal" {...post} href="/blog" />
+  ))}
+</div>`,
+      },
+      {
+        label: "Minimal list",
+        code: `<div className="max-w-md">
+  {[
+    { title: "Tailwind CSS v4 の新機能", date: "2026-04-10", tags: ["CSS"] },
+    { title: "TypeScript 5.5 リリースノート", date: "2026-04-08", tags: ["TypeScript"] },
+    { title: "React 19 で変わること", date: "2026-04-05", tags: ["React"] },
+  ].map((post) => (
+    <ArticleCard key={post.title} variant="minimal" {...post} href="/blog" />
+  ))}
+</div>`,
+      },
+    ],
+  },
+
+  // ── Reading Progress ─────────────────────────────────────────────
+  {
+    name: "reading-progress",
+    title: "Reading Progress",
+    description: "ページのスクロール量に応じて進捗を表示する固定バー。ブログ記事の読了状況確認に便利。",
+    category: "feedback",
+    filePath: "registry/components/reading-progress.tsx",
+    props: [
+      { name: "color", type: '"primary" | "blue" | "green" | "purple" | "orange" | "pink"', default: '"primary"', description: "バーの色" },
+      { name: "height", type: "number", default: "3", description: "バーの高さ（px）" },
+      { name: "position", type: '"top" | "bottom"', default: '"top"', description: "バーの表示位置" },
+      { name: "className", type: "string", description: "追加のCSSクラス" },
+    ],
+    usage: `import { ReadingProgress } from "@/components/ui/reading-progress"
+
+export default function BlogLayout({ children }) {
+  return (
+    <>
+      <ReadingProgress color="purple" />
+      <main>{children}</main>
+    </>
+  )
+}`,
+    examples: [
+      {
+        label: "Basic",
+        code: `<ReadingProgress color="primary" />`,
+      },
+      {
+        label: "Colors",
+        code: `<div className="space-y-2">
+  {(["primary","blue","green","purple","orange","pink"] as const).map(color => (
+    <div key={color} className="flex items-center gap-3">
+      <span className="w-16 text-xs text-muted-foreground">{color}</span>
+      <div className="flex-1 h-1.5 rounded-full bg-muted overflow-hidden">
+        <div className={
+          color === "primary" ? "h-full w-3/4 bg-primary rounded-full" :
+          color === "blue" ? "h-full w-3/4 bg-blue-500 rounded-full" :
+          color === "green" ? "h-full w-3/4 bg-emerald-500 rounded-full" :
+          color === "purple" ? "h-full w-3/4 bg-violet-500 rounded-full" :
+          color === "orange" ? "h-full w-3/4 bg-orange-500 rounded-full" :
+          "h-full w-3/4 bg-pink-500 rounded-full"
+        } />
+      </div>
+    </div>
+  ))}
+</div>`,
+      },
+    ],
+  },
+
+  // ── Table of Contents ────────────────────────────────────────────
+  {
+    name: "table-of-contents",
+    title: "Table of Contents",
+    description: "記事内の見出しをナビゲートする目次コンポーネント。IntersectionObserver でスクロール位置と連動し、アクティブ項目をハイライト。",
+    category: "navigation",
+    filePath: "registry/components/table-of-contents.tsx",
+    props: [
+      { name: "items", type: "{ id: string; label: string; level?: 1 | 2 | 3 }[]", description: "目次項目の配列" },
+      { name: "title", type: "string", default: '"目次"', description: "目次のタイトル" },
+      { name: "activeId", type: "string", description: "外部から制御するアクティブID（省略時は自動検出）" },
+      { name: "className", type: "string", description: "追加のCSSクラス" },
+    ],
+    usage: `import { TableOfContents } from "@/components/ui/table-of-contents"
+
+export default function ArticlePage() {
+  return (
+    <div className="flex gap-8">
+      <article className="flex-1">
+        <h2 id="intro">はじめに</h2>
+        <h2 id="setup">セットアップ</h2>
+        <h3 id="install">インストール</h3>
+        <h2 id="usage">使い方</h2>
+      </article>
+      <aside className="w-48">
+        <TableOfContents
+          items={[
+            { id: "intro", label: "はじめに" },
+            { id: "setup", label: "セットアップ" },
+            { id: "install", label: "インストール", level: 2 },
+            { id: "usage", label: "使い方" },
+          ]}
+        />
+      </aside>
+    </div>
+  )
+}`,
+    examples: [
+      {
+        label: "Basic",
+        code: `<TableOfContents
+  items={[
+    { id: "intro", label: "はじめに" },
+    { id: "setup", label: "セットアップ" },
+    { id: "install", label: "インストール", level: 2 },
+    { id: "config", label: "設定", level: 2 },
+    { id: "usage", label: "使い方" },
+    { id: "examples", label: "サンプル", level: 2 },
+  ]}
+  className="w-48"
+/>`,
+      },
+      {
+        label: "With active item",
+        code: `<TableOfContents
+  activeId="setup"
+  items={[
+    { id: "intro", label: "はじめに" },
+    { id: "setup", label: "セットアップ" },
+    { id: "install", label: "インストール", level: 2 },
+    { id: "usage", label: "使い方" },
+  ]}
+  className="w-48"
+/>`,
+      },
+    ],
+  },
 ];
 
 export function getComponentByName(name: string): ComponentConfig | undefined {
