@@ -32,7 +32,7 @@ export default async function ComponentPage({ params }: PageProps) {
 	if (!comp) notFound();
 
 	const source = await getComponentSource(comp.filePath);
-	const registryUrl = `http://localhost:3000/registry/${comp.name}.json`;
+	const registryUrl = `https://ui.daigo-suhara.com/registry/${comp.name}.json`;
 	const installCmd = `npx shadcn add ${registryUrl}`;
 
 	const shikiOpts = { lang: "tsx", theme: "github-dark-dimmed" } as const;

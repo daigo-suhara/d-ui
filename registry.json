@@ -1,7 +1,7 @@
 {
 	"$schema": "https://ui.shadcn.com/schema/registry.json",
 	"name": "dai-ui",
-	"homepage": "http://localhost:3000",
+	"homepage": "https://ui.daigo-suhara.com",
 	"items": [
 		{
 			"name": "gradient-button",
