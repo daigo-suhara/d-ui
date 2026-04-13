@@ -43,6 +43,9 @@ next-env.d.ts
 # OpenNext
 .open-next
 
+# Generated registry static files (created by scripts/build-registry.ts)
+/public/registry/
+
 # wrangler files
 .wrangler
 .dev.vars*
