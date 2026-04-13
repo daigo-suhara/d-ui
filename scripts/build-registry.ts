@@ -3,9 +3,7 @@
  * build-registry.ts
  *
  * Generates static JSON files in public/registry/<name>.json at build time.
- * Each file contains the registry item metadata with component source embedded.
- *
- * This avoids runtime fs.readFile calls which fail on Cloudflare Workers.
+ * Also generates lib/registry-content.json for runtime access without fs.
  */
 
 import { promises as fs } from "fs";
@@ -56,6 +54,22 @@ async function main() {
   }
 
   console.log(`\nGenerated ${registry.items.length} registry files.`);
+
+  // Also generate a single JSON file with all content for runtime access
+  const allContent: Record<string, string> = {};
+  for (const item of registry.items) {
+    for (const file of item.files) {
+      const filePath = path.join(root, file.path);
+      const content = await fs.readFile(filePath, "utf-8");
+      allContent[file.path] = content;
+    }
+  }
+  await fs.writeFile(
+    path.join(root, "lib", "registry-content.json"),
+    JSON.stringify(allContent, null, 2),
+    "utf-8"
+  );
+  console.log(`✓ lib/registry-content.json`);
 }
 
 main().catch((err) => {

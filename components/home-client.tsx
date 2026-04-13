@@ -24,6 +24,13 @@ import { StepIndicator } from "@/registry/components/step-indicator";
 
 export function HomeClient() {
 	const [rating, setRating] = React.useState(4);
+	const [mounted, setMounted] = React.useState(false);
+
+	React.useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	const origin = mounted ? window.location.origin : "https://d-ui.daigo-suhara.com";
 
 	return (
 		<div className="mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-16 space-y-16">
@@ -224,7 +231,7 @@ export function HomeClient() {
 						インストール方法
 					</div>
 					<div className="rounded-lg border bg-muted/50 px-3 py-2 font-mono text-xs text-foreground/80 break-all">
-						npx shadcn add https://d-ui.daigo-suhara.com/registry/[name].json
+						npx shadcn add {origin}/registry/[name].json
 					</div>
 					<p className="text-xs text-muted-foreground leading-relaxed">
 						各コンポーネントページのインストールコマンドをコピーして実行するだけで、プロジェクトに追加できます。
