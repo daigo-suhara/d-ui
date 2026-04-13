@@ -7,13 +7,13 @@
 shadcn/ui CLI を使ってプロジェクトに追加できます。
 
 ```bash
-npx shadcn@latest add <site-url>/registry/<component-name>.json
+npx shadcn add https://d-ui.daigo-suhara.com/registry/<component-name>.json
 ```
 
 例:
 
 ```bash
-npx shadcn@latest add https://d-ui.daigo-suhara.com/registry/gradient-button.json
+npx shadcn add https://d-ui.daigo-suhara.com/registry/table-of-contents.json
 ```
 
 ## 開発
