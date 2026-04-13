@@ -85,6 +85,15 @@ export function ${toPascalCase(name)}({ className, children, ...props }: ${toPas
     });
     await fs.writeFile(registryPath, JSON.stringify(registry, null, 2) + "\n", "utf-8");
     console.log(`✓ Added "${name}" to registry.json`);
+
+    // 2.5 Automatically update lib/registry-content.json
+    try {
+      const { execSync } = await import("child_process");
+      console.log("Updating lib/registry-content.json...");
+      execSync("npx tsx scripts/build-registry.ts", { stdio: "inherit" });
+    } catch (err) {
+      console.warn("Failed to automatically update registry-content.json. Please run it manually.", err);
+    }
   } else {
     console.log(`  Skipped registry.json (already contains "${name}")`);
   }

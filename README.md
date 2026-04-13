@@ -2,14 +2,12 @@
 
 アニメーション・インタラクション重視の React コンポーネントライブラリ。shadcn/ui CLI で簡単に導入できます。
 
-**サイト:** https://d-ui.daigo-suhara.com
-
 ## 使い方
 
 shadcn/ui CLI を使ってプロジェクトに追加できます。
 
 ```bash
-npx shadcn@latest add https://d-ui.daigo-suhara.com/registry/<component-name>.json
+npx shadcn@latest add <site-url>/registry/<component-name>.json
 ```
 
 例:
