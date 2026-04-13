@@ -32,7 +32,7 @@ export default async function ComponentPage({ params }: PageProps) {
 	if (!comp) notFound();
 
 	const source = await getComponentSource(comp.filePath);
-	const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "";
+	const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://d-ui.daigo-suhara.com";
 	const registryUrl = `${baseUrl}/registry/${comp.name}.json`;
 	const installCmd = `npx shadcn add ${registryUrl}`;
 
